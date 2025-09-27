@@ -62,7 +62,12 @@ public class AddMedication extends AppCompatActivity {
         med.put("taken", false);
 
         db.collection("reminders").document(patientUID)
-                .update("meds", FieldValue.arrayUnion(med))
+                .set(
+                        new HashMap<String, Object>() {{
+                            put("meds", FieldValue.arrayUnion(med));
+                        }},
+                        com.google.firebase.firestore.SetOptions.merge()
+                )
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Medication added", Toast.LENGTH_SHORT).show();
                     finish(); // go back to Reminders page
