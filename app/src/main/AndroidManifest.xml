@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <!-- Recommended permission for setting alarms -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
 
@@ -20,12 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReMedi">
 
-        <!-- CRITICAL FIX: Declare the AlarmReceiver broadcast component -->
-        <receiver android:name=".AlarmReceiver" android:exported="false">
-            <intent-filter>
-                <!-- This action must match the action set in Reminders.java -->
-                <action android:name="com.example.remedi.MEDICATION_ALARM" />
-            </intent-filter>
+        <receiver
+            android:name=".AlarmReceiver"
+            android:exported="true">
         </receiver>
 
         <activity
