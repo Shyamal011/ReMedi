@@ -1,6 +1,8 @@
 package com.example.remedi;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 
@@ -38,7 +39,7 @@ public class Reminders extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminders);
 
-        recyclerView = findViewById(R.id.recyclerView); // make sure your XML has this
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         medList = new ArrayList<>();
@@ -62,10 +63,20 @@ public class Reminders extends AppCompatActivity {
 
                     if (snapshot != null && snapshot.exists()) {
                         medList.clear();
-                        List<Map<String, Object>> meds = (List<Map<String, Object>>) snapshot.get("meds");
-                        if (meds != null) {
-                            medList.addAll(meds);
+
+                        Object medsObj = snapshot.get("meds");
+                        if (medsObj instanceof List<?>) {
+                            for (Object o : (List<?>) medsObj) {
+                                if (o instanceof Map<?, ?>) {
+                                    Map<String, Object> med = new HashMap<>();
+                                    for (Map.Entry<?, ?> entry : ((Map<?, ?>) o).entrySet()) {
+                                        med.put(String.valueOf(entry.getKey()), entry.getValue());
+                                    }
+                                    medList.add(med);
+                                }
+                            }
                         }
+
                         adapter.notifyDataSetChanged();
                     }
                 });
@@ -79,9 +90,12 @@ public class Reminders extends AppCompatActivity {
         }
     }
 
-    // RecyclerView Adapter
-    static class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
+    public void addMed(View view) {
+        startActivity(new Intent(Reminders.this, AddMedication.class));
+    }
 
+    // RecyclerView Adapter class inside Reminders
+    static class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
         private final List<Map<String, Object>> meds;
 
         MedAdapter(List<Map<String, Object>> meds) {
@@ -91,7 +105,7 @@ public class Reminders extends AppCompatActivity {
         @NonNull
         @Override
         public MedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.each_med, parent, false);
             return new MedViewHolder(view);
         }
 
@@ -102,18 +116,18 @@ public class Reminders extends AppCompatActivity {
             holder.time.setText((String) med.get("time"));
             holder.checkbox.setChecked(Boolean.TRUE.equals(med.get("taken")));
 
-            // Update Firestore when checkbox is toggled
             holder.checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                med.put("taken", isChecked);
+
                 FirebaseFirestore.getInstance()
                         .collection("reminders")
                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .update("meds", meds) // overwrite meds list with updated "taken" values
-                        .addOnSuccessListener(aVoid -> {
-                            med.put("taken", isChecked);
-                        })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(buttonView.getContext(), "Failed to update", Toast.LENGTH_SHORT).show();
-                        });
+                        .set(new HashMap<String, Object>() {{
+                            put("meds", meds);
+                        }}, com.google.firebase.firestore.SetOptions.merge())
+                        .addOnFailureListener(e ->
+                                Toast.makeText(buttonView.getContext(), "Failed to update", Toast.LENGTH_SHORT).show()
+                        );
             });
         }
 
@@ -135,3 +149,4 @@ public class Reminders extends AppCompatActivity {
         }
     }
 }
+

@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,10 +31,10 @@ public class AddMedication extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medication);
 
-        medNameInput = findViewById(R.id.editTextText);
-        totalQtyInput = findViewById(R.id.editTextNumber);
-        dosageQtyInput = findViewById(R.id.editTextNumber1);
-        timeInput = findViewById(R.id.editTextTime);
+        medNameInput = findViewById(R.id.medNameInput);
+        totalQtyInput = findViewById(R.id.totalQtyInput);
+        dosageQtyInput = findViewById(R.id.dosageQtyInput);
+        timeInput = findViewById(R.id.timeInput);
         addButton = findViewById(R.id.button3);
 
         db = FirebaseFirestore.getInstance();
@@ -61,19 +62,33 @@ public class AddMedication extends AppCompatActivity {
         med.put("time", time);
         med.put("taken", false);
 
-        db.collection("reminders").document(patientUID)
-                .set(
-                        new HashMap<String, Object>() {{
-                            put("meds", FieldValue.arrayUnion(med));
-                        }},
-                        com.google.firebase.firestore.SetOptions.merge()
-                )
+        db.collection("reminders")
+                .document(patientUID)
+                .update("meds", FieldValue.arrayUnion(med))
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Medication added", Toast.LENGTH_SHORT).show();
-                    finish(); // go back to Reminders page
+                    finish(); // go back to previous page
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    // Document doesn't exist, create a new one
+                    ArrayList<Map<String, Object>> medArray = new ArrayList<>();
+                    medArray.add(med);
+
+                    Map<String, Object> newDoc = new HashMap<>();
+                    newDoc.put("meds", medArray);
+
+                    db.collection("reminders")
+                            .document(patientUID)
+                            .set(newDoc)
+                            .addOnSuccessListener(unused -> {
+                                Toast.makeText(this, "Medication added", Toast.LENGTH_SHORT).show();
+                                finish();
+                            })
+                            .addOnFailureListener(err ->
+                                    Toast.makeText(this, "Error: " + err.getMessage(), Toast.LENGTH_SHORT).show()
+                            );
                 });
+
+
     }
 }
