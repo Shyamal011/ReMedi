@@ -42,7 +42,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/med_name"
-
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -54,12 +53,14 @@
 
     <EditText
         android:id="@+id/medNameInput"
-        android:layout_width="364dp"
-        android:layout_height="32dp"
+        android:layout_width="339dp"
+        android:layout_height="38dp"
+        android:autofillHints=""
         android:background="@color/white"
         android:ems="10"
         android:hint="@string/eg_med"
         android:inputType="text"
+        android:padding="8dp"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -85,23 +86,43 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.397" />
 
-    <EditText
-        android:id="@+id/totalQtyInput"
+    <!-- Feature 1: Total Quantity Input with Spinner -->
+    <LinearLayout
+        android:id="@+id/totalQtyLayout"
         android:layout_width="364dp"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:background="@color/white"
-        android:ems="10"
-        android:hint="@string/eg_qty"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.457" />
+        app:layout_constraintVertical_bias="0.457">
+
+        <EditText
+            android:id="@+id/totalQtyInput"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/eg_qty"
+            android:inputType="numberDecimal"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:autofillHints="" />
+
+        <Spinner
+            android:id="@+id/totalQtyTypeSpinner"
+            android:layout_width="30sp"
+            android:layout_height="match_parent"
+            android:spinnerMode="dropdown"
+            android:gravity="center"
+            android:padding="4dp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView5"
@@ -118,23 +139,43 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.541" />
 
-    <EditText
-        android:id="@+id/dosageQtyInput"
+    <!-- Feature 1: Dosage Quantity Input with Spinner -->
+    <LinearLayout
+        android:id="@+id/dosageQtyLayout"
         android:layout_width="364dp"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:background="@color/white"
-        android:ems="10"
-        android:hint="@string/eg_dqty"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.608" />
+        app:layout_constraintVertical_bias="0.608">
+
+        <EditText
+            android:id="@+id/dosageQtyInput"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/eg_dqty"
+            android:inputType="numberDecimal"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:autofillHints="" />
+
+        <Spinner
+            android:id="@+id/dosageQtyTypeSpinner"
+            android:layout_width="30sp"
+            android:layout_height="match_parent"
+            android:spinnerMode="dropdown"
+            android:gravity="center"
+            android:padding="4dp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView6"
@@ -151,23 +192,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.685" />
 
+    <!-- Feature 2: Time Picker Input -->
     <EditText
         android:id="@+id/timeInput"
         android:layout_width="364dp"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:ems="10"
         android:hint="@string/eg_time"
-        android:inputType="time"
+        android:inputType="none"
+        android:clickable="true"
+        android:focusable="false"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.745" />
+        app:layout_constraintVertical_bias="0.745"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/button3"
