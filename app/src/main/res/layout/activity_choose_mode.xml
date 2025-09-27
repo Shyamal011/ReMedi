@@ -7,6 +7,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChooseMode">
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ch_mod"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/patient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/patient"
@@ -14,11 +25,12 @@
         android:layout_height="wrap_content"
         android:text="@string/ptnt"
         android:onClick="PatientMode"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@color/purple"
+        app:layout_constraintBottom_toTopOf="@+id/guardian"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView7"
         app:layout_constraintVertical_bias="0.325" />
 
     <Button
@@ -26,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/grdn"
+        android:backgroundTint="@color/purple"
         android:onClick="GuardianMode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +46,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patient"
         app:layout_constraintVertical_bias="0.276" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
