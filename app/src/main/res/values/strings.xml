@@ -2,7 +2,7 @@
     <string name="app_name">ReMedi</string>
     <string name="ad_med">Add medicines</string>
     <string name="add_med">Add medication</string>
-    <string name="rem">Today\'s Reminders</string>
+    <string name="tdy_rem">Today\'s Reminders</string>
     <string name="cb1">medicine 1</string>
     <string name="cb2">medicine 2</string>
     <string name="cb3">medicine 3</string>
@@ -27,5 +27,8 @@
     <string name="ptnt">Patient</string>
     <string name="grdn">Guardian</string>
     <string name="ch_mod">Choose Mode</string>
+    <string name="inv">Inventory</string>
+    <string name="rem">Reminders</string>
+    <string name="notes">Notes</string>
 
 </resources>
