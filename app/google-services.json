@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "173546068281",
+    "project_id": "remedi-41010",
+    "storage_bucket": "remedi-41010.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173546068281:android:bcfac1768046c4d1ec70e8",
+        "android_client_info": {
+          "package_name": "com.example.remedi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD17xzIHDT8W3fz0eu_qcwkpHjcQ_4eGBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
