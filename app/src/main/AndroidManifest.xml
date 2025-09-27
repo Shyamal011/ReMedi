@@ -12,7 +12,49 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReMedi">
         <activity
-            android:name=".MainActivity"
+            android:name=".gIndividualNotePage"
+            android:exported="false" />
+        <activity
+            android:name=".gNotes"
+            android:exported="false" />
+        <activity
+            android:name=".gInventory"
+            android:exported="false" />
+        <activity
+            android:name=".gReminders"
+            android:exported="false" />
+        <activity
+            android:name=".gHomePage"
+            android:exported="false" />
+        <activity
+            android:name=".AddMedication"
+            android:exported="false" />
+        <activity
+            android:name=".IndividualNotePage"
+            android:exported="false" />
+        <activity
+            android:name=".ChatBot"
+            android:exported="false" />
+        <activity
+            android:name=".Notes"
+            android:exported="false" />
+        <activity
+            android:name=".Inventory"
+            android:exported="false" />
+        <activity
+            android:name=".Reminders"
+            android:exported="false" />
+        <activity
+            android:name=".HomePage"
+            android:exported="false" />
+        <activity
+            android:name=".LinkPatient"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".ChooseMode"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
