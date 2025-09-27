@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">ReMedi</string>
+    <string name="ad_med">Add medicines</string>
+    <string name="add_med">Add medication</string>
+    <string name="rem">Today\'s Reminders</string>
+    <string name="cb1">medicine 1</string>
+    <string name="cb2">medicine 2</string>
+    <string name="cb3">medicine 3</string>
+    <string name="logo_desc">ReMedi app logo</string>
+    <string name="med_name">Medicine Name</string>
+    <string name="tot_qty">Total Quantity</string>
+    <string name="dos_qty">Quantity per dose</string>
+    <string name="time">Time of dose</string>
+    <string name="pswd">Password</string>
+    <string name="phone">Phone number</string>
+    <string name="s_prompt">Not a user? Sign up</string>
+    <string name="cont">Continue</string>
+    <string name="email">Email address</string>
+    <string name="log">Log in</string>
+    <string name="login">Already a user? Log in</string>
+    <string name="forgot">Forgot password?</string>
+    <string name="p">Name</string>
+    <string name="signRedirect"><u>Not a user? Sign up</u></string>
+    <string name="loginRedirect"><u>Already a user? Log in</u></string>
+    <string name="n">100</string>">
+    <string name="time_">12:00</string>
+
 </resources>
