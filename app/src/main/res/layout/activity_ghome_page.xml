@@ -42,6 +42,7 @@
         android:layout_height="60dp"
         android:backgroundTint="@color/purple"
         android:text="@string/rem"
+        android:onClick="gRemPage"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"

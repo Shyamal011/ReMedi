@@ -124,8 +124,6 @@ public class AddMedication extends AppCompatActivity {
                                     Toast.makeText(this, "Error: " + err.getMessage(), Toast.LENGTH_SHORT).show()
                             );
                 });
-
-
     }
 
     /**

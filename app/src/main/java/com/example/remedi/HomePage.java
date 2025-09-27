@@ -26,6 +26,12 @@ public class HomePage extends AppCompatActivity {
     public void RemPage(View view) {
         startActivity(new Intent(HomePage.this, Reminders.class));
     }
+    public void InvPage(View view) {
+        startActivity(new Intent(HomePage.this, Inventory.class));
+    }
+    public void LogPage(View view) {
+        startActivity(new Intent(HomePage.this, Notes.class));
+    }
     public void ChatPage(View view) {
         startActivity(new Intent(HomePage.this, ChatBot.class));
     }
