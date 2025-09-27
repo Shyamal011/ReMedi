@@ -38,5 +38,8 @@
     <string name="title">Enter Title</string>
     <string name="enter_note">Enter Note</string>
     <string name="save_note">Save Note</string>
+    <string name="send">Send</string>
+    <string name="chatbot_ready">Chatbot ready...\n</string>
+    <string name="type_prompt">Type a message</string>
 
 </resources>
