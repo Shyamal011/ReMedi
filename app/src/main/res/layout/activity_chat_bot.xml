@@ -24,18 +24,19 @@
 
     <TextView
         android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/presc_an"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.569"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.071" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/presc_an"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.569"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.071" />
 
     <ScrollView
         android:id="@+id/chatScrollView"
@@ -56,17 +57,19 @@
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
             android:text="@string/chatbot_ready"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="@color/black" />
     </ScrollView>
 
     <Button
         android:id="@+id/sendButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:background="@color/purple"
+        android:backgroundTint="@color/purple"
         android:text="@string/send"
         android:textColor="@color/white"
         android:textSize="18sp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.901"
@@ -83,6 +86,8 @@
         android:hint="@string/type_prompt"
         android:inputType="text"
         android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

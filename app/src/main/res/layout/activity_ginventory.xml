@@ -28,6 +28,8 @@
         android:text="@string/med_inv"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,6 +41,9 @@
         android:backgroundTint="@color/purple"
         android:onClick="addMed"
         android:text="@string/ad_med"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
