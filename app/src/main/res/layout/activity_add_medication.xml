@@ -6,7 +6,8 @@
     android:background="@color/blue"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddMedication">
+    tools:context=".AddMedications">
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -24,8 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_med"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +35,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/med_name"
-        android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/editTextText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,8 +47,6 @@
         android:autofillHints=""
         android:ems="10"
         android:inputType="text"
-        android:background="@color/white"
-        android:hint="@string/p"
         app:layout_constraintTop_toBottomOf="@id/textView3"
         app:layout_constraintBottom_toTopOf="@id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,8 +59,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tot_qty"
-        android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/editTextText"
         app:layout_constraintBottom_toTopOf="@id/editTextNumber"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,8 +71,6 @@
         android:autofillHints=""
         android:ems="10"
         android:inputType="number"
-        android:background="@color/white"
-        android:hint="@string/n"
         app:layout_constraintTop_toBottomOf="@id/textView4"
         app:layout_constraintBottom_toBottomOf="@id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,8 +85,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dos_qty"
-        android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/editTextNumber"
         app:layout_constraintBottom_toTopOf="@id/editTextNumber1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,11 +96,9 @@
         android:id="@+id/editTextNumber1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:autofillHints=""
         android:ems="10"
         android:inputType="number"
-        android:hint="@string/n"
         app:layout_constraintTop_toBottomOf="@id/textView5"
         app:layout_constraintBottom_toTopOf="@id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,8 +112,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/time"
-        android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/editTextNumber1"
         app:layout_constraintBottom_toTopOf="@+id/editTextTime"
         app:layout_constraintEnd_toEndOf="parent"
@@ -139,9 +124,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
-        android:background="@color/white"
         android:ems="10"
-        android:hint="@string/time_"
         android:inputType="time"
         tools:layout_editor_absoluteX="107dp"
         tools:layout_editor_absoluteY="677dp"
@@ -155,7 +138,6 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:text="@string/add_med"
         app:layout_constraintTop_toBottomOf="@id/editTextTime"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -163,5 +145,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="290dp"
         tools:layout_editor_absoluteY="664dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
