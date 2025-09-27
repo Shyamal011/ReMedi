@@ -41,5 +41,8 @@
     <string name="send">Send</string>
     <string name="chatbot_ready">Chatbot ready...\n</string>
     <string name="type_prompt">Type a message</string>
-
+    <string name="eg_med">eg: Paracetamol</string>
+    <string name="eg_qty">eg: 30 units</string>
+    <string name="eg_dqty">eg: 1 unit</string>
+    <string name="eg_time">eg: 12:00</string>
 </resources>
