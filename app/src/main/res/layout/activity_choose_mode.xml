@@ -24,12 +24,12 @@
         android:id="@+id/textView7"
         android:layout_width="184dp"
         android:layout_height="46dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="308dp"
         android:text="@string/ch_mod"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
