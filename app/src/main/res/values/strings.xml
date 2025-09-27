@@ -30,6 +30,13 @@
     <string name="inv">Inventory</string>
     <string name="rem">Reminders</string>
     <string name="notes">Notes</string>
-    ><string name="presc_an">Prescription Analysis</string>
+    <string name="presc_an">Prescription Analysis</string>
+    <string name="med_inv">Medication Inventory</string>
+    <string name="ad_pat_code">Enter Patient Code</string>
+    <string name="link">Link</string>
+    <string name="ad_notes">Add Note</string>
+    <string name="title">Enter Title</string>
+    <string name="enter_note">Enter Note</string>
+    <string name="save_note">Save Note</string>
 
 </resources>
