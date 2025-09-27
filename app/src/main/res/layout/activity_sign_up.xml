@@ -26,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/signEmail"
@@ -35,27 +36,15 @@
         app:layout_constraintVertical_bias="0.784" />
 
     <EditText
-        android:id="@+id/signPass"
-        android:layout_width="224dp"
-        android:layout_height="32dp"
-        android:layout_marginBottom="232dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:hint=" Password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signEmail"
-        app:layout_constraintVertical_bias="0.198" />
-
-    <EditText
         android:id="@+id/signEmail"
         android:layout_width="224dp"
         android:layout_height="32dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" Email address"
+        android:hint="@string/email"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="18sp"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,6 +53,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.43" />
 
+
+    <EditText
+        android:id="@+id/signPass"
+        android:layout_width="224dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="232dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="@string/pswd"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:inputType="textPassword"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signEmail"
+        app:layout_constraintVertical_bias="0.198" />
+
     <Button
         android:id="@+id/signButton"
         android:layout_width="224dp"
@@ -71,6 +79,8 @@
         android:backgroundTint="@color/purple"
         android:onClick="signUp"
         android:text="@string/cont"
+        android:textColor="@color/white"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,6 +93,7 @@
         android:layout_height="wrap_content"
         android:text="@string/loginRedirect"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"
