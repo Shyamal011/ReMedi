@@ -31,7 +31,7 @@ public class ChatBot extends AppCompatActivity {
     private ScrollView chatScrollView;
 
     // ⚠️ Replace this with your API key
-    private final String stringAPIKey = "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";
+    private final String stringAPIKey = "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"; // use valid key
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,78 +43,64 @@ public class ChatBot extends AppCompatActivity {
         Button sendButton = findViewById(R.id.sendButton);
         chatScrollView = findViewById(R.id.chatScrollView);
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userMessage = userInput.getText().toString().trim();
-                if (!userMessage.isEmpty()) {
-                    chatTextView.append("You: " + userMessage + "\n");
-                    userInput.setText("");
-                    callChatGPT(userMessage);
-                }
+        sendButton.setOnClickListener(v -> {
+            String userMessage = userInput.getText().toString().trim();
+            if (!userMessage.isEmpty()) {
+                chatTextView.append("You: " + userMessage + "\n");
+                userInput.setText("");
+                callChatGPT(userMessage);
             }
         });
     }
 
     private void callChatGPT(String userMessage) {
         JSONObject jsonObject = new JSONObject();
-
         try {
-            jsonObject.put("model", "gpt-4o-mini");
-            JSONArray jsonArrayMessage = new JSONArray();
-            JSONObject jsonObjectMessage = new JSONObject();
-            jsonObjectMessage.put("role", "user");
-            jsonObjectMessage.put("content", userMessage);
-            jsonArrayMessage.put(jsonObjectMessage);
-
-            jsonObject.put("messages", jsonArrayMessage);
-
+            jsonObject.put("model", "gpt-4o-mini"); // ✅ changed to 4.0 mini
+            JSONArray messagesArray = new JSONArray();
+            JSONObject messageObject = new JSONObject();
+            messageObject.put("role", "user");
+            messageObject.put("content", userMessage);
+            messagesArray.put(messageObject);
+            jsonObject.put("messages", messagesArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        String stringURLEndPoint = "https://api.openai.com/v1/chat/completions";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
-                stringURLEndPoint, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    String reply = response.getJSONArray("choices")
-                            .getJSONObject(0)
-                            .getJSONObject("message")
-                            .getString("content");
+        String url = "https://api.openai.com/v1/chat/completions";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+                response -> {
+                    try {
+                        String reply = response.getJSONArray("choices")
+                                .getJSONObject(0)
+                                .getJSONObject("message")
+                                .getString("content");
 
-                    chatTextView.append("Bot: " + reply.trim() + "\n\n");
-
-                    // Auto-scroll to bottom
-                    chatScrollView.post(() -> chatScrollView.fullScroll(View.FOCUS_DOWN));
-
-                } catch (JSONException e) {
-                    chatTextView.append("Bot: [Error parsing response]\n");
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                chatTextView.append("Bot: [Error: " + volleyError.toString() + "]\n");
-            }
-        }) {
+                        chatTextView.append("Bot: " + reply.trim() + "\n\n");
+                        chatScrollView.post(() -> chatScrollView.fullScroll(View.FOCUS_DOWN));
+                    } catch (JSONException e) {
+                        chatTextView.append("Bot: [Error parsing response]\n");
+                    }
+                },
+                error -> chatTextView.append("Bot: [Error: " + error.toString() + "]\n")
+        ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> mapHeader = new HashMap<>();
-                mapHeader.put("Authorization", "Bearer " + stringAPIKey);
-                mapHeader.put("Content-Type", "application/json");
-                return mapHeader;
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + stringAPIKey.trim());
+                headers.put("Content-Type", "application/json");
+                return headers;
             }
         };
 
-        int intTimeoutPeriod = 60000;
+        // Increase timeout to 90 seconds
         RetryPolicy retryPolicy = new DefaultRetryPolicy(
-                intTimeoutPeriod,
+                90000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        jsonObjectRequest.setRetryPolicy(retryPolicy);
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        );
+        request.setRetryPolicy(retryPolicy);
 
-        Volley.newRequestQueue(getApplicationContext()).add(jsonObjectRequest);
+        Volley.newRequestQueue(getApplicationContext()).add(request);
     }
 }
