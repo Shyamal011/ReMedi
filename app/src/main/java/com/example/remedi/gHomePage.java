@@ -24,10 +24,10 @@ public class gHomePage extends AppCompatActivity {
         });
     }
     public void gRemPage(View view) {
-        startActivity(new Intent(gHomePage.this, Reminders.class));
+        startActivity(new Intent(gHomePage.this, gReminders.class));
     }
     public void gInventory(View view) {
-        startActivity(new Intent(gHomePage.this, gReminders.class));
+        startActivity(new Intent(gHomePage.this, gInventory.class));
     }
     public void gNotes(View view) {
         startActivity(new Intent(gHomePage.this, gNotes.class));

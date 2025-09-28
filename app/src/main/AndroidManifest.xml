@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Required for starting the alarm broadcast -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Recommended permission for setting alarms -->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -18,24 +23,36 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReMedi">
+        <activity
+            android:name=".gReminders"
+            android:exported="false" />
+        <activity
+            android:name=".AddNotes"
+            android:exported="false" />
 
         <receiver
             android:name=".AlarmReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.example.remedi.MEDICATION_ALARM" />
             </intent-filter>
         </receiver>
 
         <activity
             android:name=".Reminders"
             android:exported="true" />
-
         <activity
             android:name=".gIndividualNotePage"
             android:exported="false" />
         <activity
+            android:name=".NotesAdapter"
+            android:exported="false" />
+        <activity
             android:name=".gNotes"
+            android:exported="false" />
+        <activity
+            android:name=".gInventory"
             android:exported="false" />
         <activity
             android:name=".gHomePage"
