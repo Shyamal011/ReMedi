@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Required for starting the alarm broadcast -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Recommended permission for setting alarms -->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
@@ -18,12 +24,24 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReMedi">
+        <activity
+            android:name=".AddNotes"
+            android:exported="false" />
+        <activity
+            android:name=".NotesAdapter"
+            android:exported="false" /> <!-- CRITICAL FIX: Declare the AlarmReceiver broadcast component -->
+        <receiver
+            android:name=".AlarmReceiver"
+            android:exported="false">
 
         <receiver
             android:name=".AlarmReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
+
+                <!-- This action must match the action set in Reminders.java -->
+                <action android:name="com.example.remedi.MEDICATION_ALARM" />
             </intent-filter>
         </receiver>
 
@@ -36,6 +54,12 @@
             android:exported="false" />
         <activity
             android:name=".gNotes"
+            android:exported="false" />
+        <activity
+            android:name=".gInventory"
+            android:exported="false" />
+        <activity
+            android:name=".gReminders"
             android:exported="false" />
         <activity
             android:name=".gHomePage"
@@ -54,6 +78,9 @@
             android:exported="false" />
         <activity
             android:name=".Inventory"
+            android:exported="false" />
+        <activity
+            android:name=".Reminders"
             android:exported="false" />
         <activity
             android:name=".HomePage"
