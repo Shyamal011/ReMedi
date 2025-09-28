@@ -31,7 +31,7 @@ public class ChatBot extends AppCompatActivity {
     private ScrollView chatScrollView;
 
     // ⚠️ Replace this with your API key
-    private final String stringAPIKey = "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"; // use valid key
+    private final String stringAPIKey = "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"; // use valid key
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
