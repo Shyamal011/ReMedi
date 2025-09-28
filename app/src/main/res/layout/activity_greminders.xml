@@ -35,20 +35,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Button must be constrained to the bottom -->
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple"
-        android:onClick="addMed"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:text="@string/ad_med"
-        android:textColor="@color/white"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- RecyclerView's bottom constraint is now the Button's top -->
     <androidx.recyclerview.widget.RecyclerView
@@ -56,11 +42,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
-        app:layout_constraintBottom_toTopOf="@id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView"
-        app:layout_constraintVertical_bias="0.0" /> <!-- CRITICAL CHANGE HERE -->
+        app:layout_constraintTop_toBottomOf="@id/textView" /> <!-- CRITICAL CHANGE HERE -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
