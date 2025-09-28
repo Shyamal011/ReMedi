@@ -45,6 +45,7 @@ public class Reminders extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         medList = new ArrayList<>();
+        // MedAdapter is now a NON-STATIC inner class
         adapter = new MedAdapter(medList);
         recyclerView.setAdapter(adapter);
 
@@ -96,8 +97,34 @@ public class Reminders extends AppCompatActivity {
         startActivity(new Intent(Reminders.this, AddMedication.class));
     }
 
-    // RecyclerView Adapter class inside Reminders
-    static class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
+    /**
+     * UTILITY METHOD to safely parse quantity values from the Firestore map.
+     * This handles String (from AddMedication) and various Number types (from Firestore).
+     */
+    private int getQuantityValue(Map<String, Object> med, String key) {
+        Object value = med.get(key);
+        if (value == null) return 0;
+
+        // Handles common Firebase number types (Long, Integer, Double)
+        if (value instanceof Number) {
+            return ((Number) value).intValue();
+        }
+
+        // Handles String type (as saved by your current AddMedication.java)
+        if (value instanceof String) {
+            try {
+                return Integer.parseInt((String) value);
+            } catch (NumberFormatException e) {
+                // Log.e("Reminders", "Error parsing quantity string for key " + key + ": " + value, e);
+                return 0;
+            }
+        }
+
+        return 0;
+    }
+
+    // RecyclerView Adapter class inside Reminders (NON-STATIC)
+    class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
         private final List<Map<String, Object>> meds;
 
         MedAdapter(List<Map<String, Object>> meds) {
@@ -112,47 +139,57 @@ public class Reminders extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull MedViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull MedAdapter.MedViewHolder holder, int position) {
             Map<String, Object> med = meds.get(position);
             holder.name.setText((String) med.get("name"));
             holder.time.setText((String) med.get("time"));
-            holder.checkbox.setOnCheckedChangeListener(null); // avoid old listeners
-            holder.checkbox.setChecked(Boolean.TRUE.equals(med.get("taken")));
+
+            // Set Checkbox State
+            holder.checkbox.setOnCheckedChangeListener(null);
+            boolean isTaken = Boolean.TRUE.equals(med.get("taken"));
+            holder.checkbox.setChecked(isTaken);
+            holder.checkbox.setEnabled(!isTaken); // Disable if already taken
 
             holder.checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                med.put("taken", isChecked);
-
-                // 🔹 Only subtract if checked
+                // Only process the stock change if checking the box (taking medication)
                 if (isChecked) {
-                    Object totalObj = med.get("totalQty");
-                    Object doseObj = med.get("dosageQty");
 
-                    int totalQty = totalObj instanceof Number ? ((Number) totalObj).intValue() : 0;
-                    int dosageQty = doseObj instanceof Number ? ((Number) doseObj).intValue() : 0;
+                    // --- FIX: Use safe retrieval method for quantities ---
+                    int totalQty = getQuantityValue(med, "totalQty");
+                    int dosageQty = getQuantityValue(med, "dosageQty");
 
                     if (dosageQty > 0) {
                         totalQty -= dosageQty;
-                        if (totalQty < 0) totalQty = 0; // prevent negative stock
+                        if (totalQty < 0) {
+                            totalQty = 0; // prevent negative stock
+                            Toast.makeText(buttonView.getContext(), "Warning: " + med.get("name") + " inventory is now empty!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        // Update the map item with the new totalQty (as an Integer/Long for better consistency)
                         med.put("totalQty", totalQty);
                     }
+
+
+                    // 🔹 Mark as taken
+                    med.put("taken", true);
+
+
+                    // 🔹 Save back to Firestore
+                    FirebaseFirestore.getInstance()
+                            .collection("reminders")
+                            .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .set(new HashMap<String, Object>() {{
+                                put("meds", meds);
+                            }}, SetOptions.merge())
+
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(buttonView.getContext(), "Failed to update: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                            );
+
+                    // Disable the checkbox instantly after checking it.
+                    holder.checkbox.setEnabled(false);
                 }
-
-                // 🔹 Save back to Firestore
-                FirebaseFirestore.getInstance()
-                        .collection("reminders")
-                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .set(new HashMap<String, Object>() {{
-                            put("meds", meds);
-                        }}, SetOptions.merge())
-
-                        .addOnFailureListener(e ->
-                                Toast.makeText(buttonView.getContext(), "Failed to update", Toast.LENGTH_SHORT).show()
-                        );
-
-
-                notifyItemChanged(holder.getAdapterPosition());
             });
-
         }
 
         @Override
@@ -160,7 +197,8 @@ public class Reminders extends AppCompatActivity {
             return meds.size();
         }
 
-        static class MedViewHolder extends RecyclerView.ViewHolder {
+        // MedViewHolder class inside MedAdapter (NON-STATIC)
+        class MedViewHolder extends RecyclerView.ViewHolder {
             TextView name, time;
             CheckBox checkbox;
 
@@ -173,4 +211,3 @@ public class Reminders extends AppCompatActivity {
         }
     }
 }
-

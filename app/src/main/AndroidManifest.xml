@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET"/>
-    <!-- Required for starting the alarm broadcast -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -23,19 +22,20 @@
         <receiver
             android:name=".AlarmReceiver"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".Reminders"
+            android:exported="true" />
 
         <activity
             android:name=".gIndividualNotePage"
             android:exported="false" />
         <activity
             android:name=".gNotes"
-            android:exported="false" />
-        <activity
-            android:name=".gInventory"
-            android:exported="false" />
-        <activity
-            android:name=".gReminders"
             android:exported="false" />
         <activity
             android:name=".gHomePage"
@@ -54,9 +54,6 @@
             android:exported="false" />
         <activity
             android:name=".Inventory"
-            android:exported="false" />
-        <activity
-            android:name=".Reminders"
             android:exported="false" />
         <activity
             android:name=".HomePage"
