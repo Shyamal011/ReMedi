@@ -45,4 +45,5 @@
     <string name="eg_qty">eg: 30 units</string>
     <string name="eg_dqty">eg: 1 unit</string>
     <string name="eg_time">eg: 12:00</string>
+    <string name="ad_note">Add Note</string>
 </resources>

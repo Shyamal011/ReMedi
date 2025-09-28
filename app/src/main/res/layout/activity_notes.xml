@@ -3,19 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/blue"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/add_button"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Note" />
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:text="@string/notes"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="8dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="553dp"
+        android:dividerHeight="8dp"
+        android:paddingBottom="20sp"
+        android:paddingTop="20sp"/>
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="374dp"
+        android:layout_height="62dp"
+        android:backgroundTint="@color/deep_purple"
+        android:text="@string/ad_note"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
 
 </LinearLayout>
 
