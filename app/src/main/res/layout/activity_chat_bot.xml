@@ -84,6 +84,7 @@
         android:layout_weight="1"
         android:autofillHints=""
         android:hint="@string/type_prompt"
+        android:textColorHint="@color/white"
         android:inputType="text"
         android:textColor="@color/black"
         android:textAlignment="center"
