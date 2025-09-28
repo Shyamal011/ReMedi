@@ -27,20 +27,12 @@
         <activity
             android:name=".AddNotes"
             android:exported="false" />
-        <activity
-            android:name=".NotesAdapter"
-            android:exported="false" /> <!-- CRITICAL FIX: Declare the AlarmReceiver broadcast component -->
-        <receiver
-            android:name=".AlarmReceiver"
-            android:exported="false">
 
         <receiver
             android:name=".AlarmReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
-
-                <!-- This action must match the action set in Reminders.java -->
                 <action android:name="com.example.remedi.MEDICATION_ALARM" />
             </intent-filter>
         </receiver>
@@ -53,13 +45,13 @@
             android:name=".gIndividualNotePage"
             android:exported="false" />
         <activity
+            android:name=".NotesAdapter"
+            android:exported="false" />
+        <activity
             android:name=".gNotes"
             android:exported="false" />
         <activity
             android:name=".gInventory"
-            android:exported="false" />
-        <activity
-            android:name=".gReminders"
             android:exported="false" />
         <activity
             android:name=".gHomePage"
@@ -78,9 +70,6 @@
             android:exported="false" />
         <activity
             android:name=".Inventory"
-            android:exported="false" />
-        <activity
-            android:name=".Reminders"
             android:exported="false" />
         <activity
             android:name=".HomePage"
